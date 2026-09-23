@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verificador de Idade</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #aaaaff;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 { color: white; font-size: 24px; }
+    .card {
+      background-color: white;
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 8px 16px 16px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      font-size: 14px;
+    }
+    .card p, .card div { margin: 12px 0; }
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    footer { color: white; font-style: italic; font-size: 12px; margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <h1>Verificador de Idade</h1>
+ 
+  <div class="card">
+    <div>
+      <label for="ano">Ano de Nascimento:</label>
+      <input type="number" id="ano" placeholder="1994">
+    </div>
+    <div>
+      Sexo:
+      <label><input type="radio" name="sexo" value="masculino"> Masculino</label>
+      <label><input type="radio" name="sexo" value="feminino"> Feminino</label>
+    </div>
+    <div><button onclick="verificar()">Verificar</button></div>
+ 
+    <div id="resultado">
+      <p>Preencha os dados acima para ver o resultado...</p>
+    </div>
+  </div>
+ 
+  <footer>&copy; Uniderp</footer>
+ 
+  <script>
+    const anoAtual = new Date().getFullYear();
+ 
+    // Como o resultado é chamado na tela, para cada faixa e sexo
+    const tipos = {
+      bebe:        { masculino: "bebê",        feminino: "bebê" },
+      crianca:     { masculino: "menino",      feminino: "menina" },
+      adolescente: { masculino: "adolescente", feminino: "adolescente" },
+      adulto:      { masculino: "homem",       feminino: "mulher" },
+      idoso:       { masculino: "idoso",       feminino: "idosa" }
+    };
+ 
+    // Descobre a faixa etária pela idade
+    function faixa(idade) {
+      if (idade <= 2) return "bebe";
+      if (idade <= 12) return "crianca";
+      if (idade <= 17) return "adolescente";
+      if (idade <= 59) return "adulto";
+      return "idoso";
+    }
+ 
+    function verificar() {
+      const ano = Number(document.getElementById("ano").value);
+      const marcado = document.querySelector('input[name="sexo"]:checked');
+      const resultado = document.getElementById("resultado");
+      const texto = document.createElement("p");
+ 
+      // Limpa o resultado anterior
+      resultado.innerHTML = "";
+ 
+      // Valida os dados
+      if (!Number.isInteger(ano) || ano < 1900 || ano > anoAtual || !marcado) {
+        texto.textContent = "Informe um ano de nascimento válido e escolha o sexo.";
+        resultado.appendChild(texto);
+        return;
+      }
+ 
+      const idade = anoAtual - ano;
+      const sexo = marcado.value;
+      const grupo = faixa(idade);
+      const tipo = tipos[grupo][sexo];
+ 
+      texto.textContent = "Detectamos " + tipo + " com " + idade + (idade === 1 ? " ano." : " anos.");
+ 
+      // imagens
+      let arquivo;
+
+        if (idade <= 2) {
+        arquivo = (sexo === "masculino") ? "bebe-masculino.jpg" : "bebe-feminino.jpg";
+        } else if (idade <= 12) {
+        arquivo = (sexo === "masculino") ? "crianca-masculino.jpg" : "crianca-feminino.jpg";
+        } else if (idade <= 17) {
+        arquivo = (sexo === "masculino") ? "adolescente-masculino.jpg" : "adolescente-feminino.jpg";
+        } else if (idade <= 59) {
+        arquivo = (sexo === "masculino") ? "adulto-masculino.jpg" : "adulto-feminino.jpg";
+        } else {
+        arquivo = (sexo === "masculino") ? "idoso-masculino.jpg" : "idoso-feminino.jpg";
+        }
+
+        const foto = document.createElement("img");
+        foto.alt = tipo;
+        foto.src = arquivo; 
+    
+        resultado.appendChild(texto);
+        resultado.appendChild(foto);
+    }
+  </script>
+</body>
+</html>
