@@ -4,19 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Multas</title>
-    <link rel="stylesheet" href="multas.css">
 </head>
 <body>
 
     <h1>Sistema de Multas</h1>
 
-    <label for="txtvel">Velocidade do carro:</label> 
-    <input type="number" name="txtvel" id="txtvel" value="100"> km/h 
+    <label for="velocidade">Velocidade do carro:</label> 
+    <input type="number" name="velocidade" id="velocidade" value="100"> km/h 
     <button onclick="verificar()">verificar</button>
 
-    <div id="resultado">
-        <!-- As mensagens aparecerão aqui -->
-    </div>
+    <p id="mensagemVelocidade"></p>
+    <p id="resultado"></p>
 
     <script src="multas.js"></script>
 
