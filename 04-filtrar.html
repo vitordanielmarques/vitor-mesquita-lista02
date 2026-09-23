@@ -1,0 +1,45 @@
+!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Filtrar</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <p>Crie um campo de entrada que filtre os itens de uma lista conforme o usuário digita.</p>
+ 
+  <input type="text" id="busca" placeholder="Digite um nome..." oninput="filtrar()">
+ 
+  <ul id="lista"></ul>
+ 
+  <script>
+    const nomes = ["João", "Márcio", "Fabiana", "Jorge", "Silvana", "Luiz", "Carlos", "Pablo"];
+ 
+    function filtrar() {
+      // Deixa tudo minúsculo para não diferenciar "jo" de "Jo"
+      const busca = document.getElementById("busca").value.toLowerCase();
+      const lista = document.getElementById("lista");
+ 
+      // 1) Limpa a lista antes de montar de novo
+      lista.innerHTML = "";
+ 
+      // 2) Laço: só adiciona na lista os nomes que contêm o texto digitado
+      for (let i = 0; i < nomes.length; i++) {
+        if (nomes[i].toLowerCase().includes(busca)) {
+          const item = document.createElement("li");
+          item.textContent = nomes[i];
+          lista.appendChild(item);
+        }
+      }
+    }
+ 
+    // Mostra todos os nomes assim que a página abre
+    filtrar();
+  </script>
+</body>
+</html>
