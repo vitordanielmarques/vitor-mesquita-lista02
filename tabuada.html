@@ -7,5 +7,38 @@
 </head>
 <body>
     <h1>tabuada.html</h1>
+    <p>Escreva um número e veja a tabuada dele</p>
+ 
+  <input type="number" id="numero" oninput="mostrarTabuada()">
+ 
+  <p id="titulo"></p>
+  <div id="tabuada"></div>
+ 
+  <script>
+    function mostrarTabuada() {
+      const campo = document.getElementById("numero");
+      const titulo = document.getElementById("titulo");
+      const tabuada = document.getElementById("tabuada");
+ 
+      // Limpa a div antes de mostrar a nova tabuada
+      tabuada.innerHTML = "";
+ 
+      // Se o campo estiver vazio ou inválido, limpa o título e para aqui
+      if (campo.value === "" || isNaN(Number(campo.value))) {
+        titulo.textContent = "";
+        return;
+      }
+ 
+      const numero = Number(campo.value);
+      titulo.textContent = "Tabuada do número: " + numero;
+ 
+      // Laço: cria um elemento para cada resultado e adiciona na div
+      for (let i = 0; i <= 10; i++) {
+        const linha = document.createElement("div");
+        linha.textContent = numero * i;
+        tabuada.appendChild(linha);
+      }
+    }
+  </script>
 </body>
 </html>
