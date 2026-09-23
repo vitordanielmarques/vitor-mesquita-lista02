@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contador de Cliques</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Contador de Aura</h1>
+ 
+  <button onclick="clicar()">Farmar!</button>
+  <button onclick="zerar()">Zerar Aura</button>
+ 
+  <p id="contador">Aura: 0</p>
+  <img id="gifAura" src="gifAura.gif" alt="Gif farmando aura">
+ 
+  <script>
+    let aura = 0;
+ 
+    function atualizar() {
+      document.getElementById("contador").textContent = "Aura: " + aura;
+    }
+ 
+    function clicar() {
+      aura++;
+      atualizar();
+      document.getElementById("gifAura").style.display = "block";
+       if (aura ==67) {
+            document.getElementById("contador").innerHTML = "<img src='baby67.png' alt='Imagem de Aura'>";
+        }
+    }
+ 
+    function zerar() {
+      aura = 0;
+      atualizar();
+    }
+  </script>
+</body>
+</html>
