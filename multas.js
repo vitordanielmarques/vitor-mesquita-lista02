@@ -3,7 +3,7 @@
  
     function verificar() {
       const campo = document.getElementById("velocidade");
-      const velocidade = Number(campo.value);
+      const velocidade = Number(campo.value); //converte o valor do campo para número
  
       const mensagemVelocidade = document.getElementById("mensagemVelocidade");
       const resultado = document.getElementById("resultado");
